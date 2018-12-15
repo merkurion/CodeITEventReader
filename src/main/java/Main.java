@@ -4,11 +4,10 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeMap;
 
 import org.apache.commons.io.IOUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -21,46 +20,47 @@ public class Main {
 			String message = IOUtils.toString(bufferedReader);
 			ObjectMapper objectMapper = new ObjectMapper();
 
-			ArrayList<Event> eventsList = objectMapper.readValue(message, new TypeReference<List<Event>>() {
+			List<Event> eventsList = objectMapper.readValue(message, new TypeReference<List<Event>>() {
 			});
 
-			Collections.sort(eventsList);
-			Iterator eventIterator = eventsList.iterator();
+			TreeMap<Integer, List<Event>> eventsMap = new TreeMap<>();
+			for (Event e : eventsList) {
+				int currentSeconds = e.getLocalTimeInSeconds();
 
-			runTimer(eventIterator);
+				if (eventsMap.containsKey(currentSeconds)) {
+					eventsMap.get(currentSeconds).add(e);
+				} else {
+
+					eventsMap.put(currentSeconds, new ArrayList<Event>() {{
+						add(e);
+					}});
+				}
+			}
+
+			runTimer(eventsMap);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static void runTimer(Iterator eventIterator) {
+	private static void runTimer(TreeMap<Integer, List<Event>> eventsMap) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
-			Event currentEvent = (Event) eventIterator.next();
 			int currentTime = 0;
 
 			@Override
 			public void run() {
 				currentTime = currentTime + 1;
-				currentEvent = checkEvent(currentEvent, currentTime, eventIterator);
-				if (currentEvent == null) {
-					timer.cancel();
-					timer.purge();
+				if (eventsMap.containsKey(currentTime)) {
+					for (Event event : eventsMap.get(currentTime)) {
+						System.out.println(event.getEventName());
+					}
+					if (eventsMap.lastKey() == currentTime) {
+						timer.cancel();
+						timer.purge();
+					}
 				}
 			}
 		}, 0, 1000);
-	}
-
-	private static Event checkEvent(Event currentEvent, int currentTime, Iterator eventIterator) {
-		if (currentEvent.getLocalTimeInSeconds() == currentTime) {
-			System.out.println(currentEvent.getEventName());
-			if (eventIterator.hasNext()) {
-				return checkEvent((Event) eventIterator.next(), currentTime, eventIterator);
-			} else {
-				return null;
-			}
-		} else {
-			return currentEvent;
-		}
 	}
 }
