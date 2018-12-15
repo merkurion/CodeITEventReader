@@ -1,4 +1,7 @@
-public class Event {
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+
+public class Event implements Comparable {
 
 	private String eventName;
 	private String time;
@@ -17,5 +20,12 @@ public class Event {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		LocalTime eTime = LocalTime.parse(time);
+		LocalTime oTime = LocalTime.parse(((Event) o).getTime());
+		return (int) ChronoUnit.MINUTES.between(oTime, eTime);
 	}
 }
