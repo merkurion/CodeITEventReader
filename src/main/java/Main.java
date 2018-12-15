@@ -37,6 +37,7 @@ public class Main {
 				}
 			}
 
+			
 			runTimer(eventsMap);
 		} catch (IOException e) {
 			e.printStackTrace();
