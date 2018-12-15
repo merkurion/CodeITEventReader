@@ -18,14 +18,20 @@ public class Event implements Comparable {
 		return time;
 	}
 
+	public LocalTime getLocalTime() {
+		return LocalTime.parse(time);
+	}
+
+	public int getLocalTimeInSeconds() {
+		return getLocalTime().getHour() * 60 + getLocalTime().getMinute();
+	}
+
 	public void setTime(String time) {
 		this.time = time;
 	}
 
 	@Override
 	public int compareTo(Object o) {
-		LocalTime eTime = LocalTime.parse(time);
-		LocalTime oTime = LocalTime.parse(((Event) o).getTime());
-		return (int) ChronoUnit.MINUTES.between(oTime, eTime);
+		return (int) ChronoUnit.MINUTES.between(((Event) o).getLocalTime(), getLocalTime());
 	}
 }
