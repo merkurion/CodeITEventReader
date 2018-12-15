@@ -1,0 +1,74 @@
+[
+  {
+    "eventName": "Visitor John Smith entered the store",
+    "time": "00:01"
+  },
+  {
+    "eventName": "Visitor John Smith picked 1 bread to his basket",
+    "time": "00:11"
+  },
+  {
+    "eventName": "Visitor John Smith picked 2 battaries AA to his basket",
+    "time": "00:19"
+  },
+  {
+    "eventName": "Visitor John Smith picked 1 chicken to his basket",
+    "time": "00:28"
+  },
+  {
+    "eventName": "Visitor John Smith went to checkout",
+    "time": "00:41"
+  },
+  {
+    "eventName": "Visitor John Smith paid for his purchases",
+    "time": "00:57"
+  },
+  {
+    "eventName": "Visitor John Smith went out the store",
+    "time": "01:05"
+  },
+  {
+    "eventName": "Visitor Jeff Williams entered the store",
+    "time": "00:07"
+  },
+  {
+    "eventName": "Visitor Jeff Williams picked 5 bannanas to his basket",
+    "time": "00:21"
+  },
+  {
+    "eventName": "Visitor Jeff Williams went to checkout",
+    "time": "00:39"
+  },
+  {
+    "eventName": "Visitor Jeff Williams paid for his purchases",
+    "time": "00:47"
+  },
+  {
+    "eventName": "Visitor Jeff Williams went out the store",
+    "time": "00:51"
+  },
+  {
+    "eventName": "Visitor Vasya Pupkin entered the store",
+    "time": "00:05"
+  },
+  {
+    "eventName": "Visitor Vasya Pupkin picked 3 battaries AAA to his basket",
+    "time": "00:23"
+  },
+  {
+    "eventName": "Visitor Jeff Williams picked 1 pineapple to his basket",
+    "time": "00:39"
+  },
+  {
+    "eventName": "Visitor Vasya Pupkin went to checkout",
+    "time": "00:57"
+  },
+  {
+    "eventName": "Visitor Vasya Pupkin paid for his purchases",
+    "time": "01:08"
+  },
+  {
+    "eventName": "Visitor Vasya Pupkin went out the store",
+    "time": "01:15"
+  }
+]

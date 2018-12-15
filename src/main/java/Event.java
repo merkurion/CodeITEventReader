@@ -18,16 +18,16 @@ public class Event implements Comparable {
 		return time;
 	}
 
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 	public LocalTime getLocalTime() {
 		return LocalTime.parse(time);
 	}
 
 	public int getLocalTimeInSeconds() {
 		return getLocalTime().getHour() * 60 + getLocalTime().getMinute();
-	}
-
-	public void setTime(String time) {
-		this.time = time;
 	}
 
 	@Override
